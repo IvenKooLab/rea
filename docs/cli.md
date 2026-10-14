@@ -315,11 +315,19 @@ redirected, which keeps large results smaller for agents and scripts; pipe
 through `jq .` for indented files. Output selection and formatting do not change
 operation status.
 
-| Status    | Meaning                                                                                                                                              |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `0`       | The operation completed. Its result may include partial evidence, warnings or unresolved questions.                                                  |
-| `1`       | The operation could not complete. Structured output identifies invalid input, permissions, cancellation, timeouts or another failure when available. |
-| `128 + N` | Signal `N` ended the process, where the shell or runtime preserves the conventional signal-derived status.                                           |
+| Status    | Meaning                                                                                                                                                                                                      |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `0`       | The operation completed. Its result may include partial evidence, warnings or unresolved questions.                                                                                                          |
+| `1`       | The operation could not complete. Structured output identifies invalid input, permissions, cancellation, timeouts or another failure when available.                                                         |
+| `128 + N` | Signal `N` ended the process, where the shell or runtime preserves the conventional signal-derived status, or a command that handled the signal exited `130` after SIGINT or `143` after SIGTERM on purpose. |
+
+A handled SIGINT or SIGTERM does not kill the process silently: the command
+prints a complete structured result with `code: "cancelled"` and finishes
+cleanup, and the exit status then depends on the command. Signal-aware
+analysis commands such as `analyze` and `analyze-javascript-application` exit
+`130` after SIGINT or `143` after SIGTERM. Commands without signal-aware
+cancellation, such as `inspect-artifact`, report `code: "cancelled"` as a
+structured failure and exit `1`.
 
 `setup --dry-run` returns `planned` and exits `0`; a cancelled setup also exits
 `0`. Setup returns `1` for `needs_confirmation` or `needs_human`.
