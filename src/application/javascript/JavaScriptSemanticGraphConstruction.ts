@@ -10,11 +10,13 @@ import {
   JavaScriptSemanticEvidenceContextRegistry,
   javaScriptSemanticNodeId,
 } from "../../domain/javascript/javascriptSemanticGraph.js";
-import type { JavaScriptSemanticGraphNode,
+import type {
+  JavaScriptSemanticGraphNode,
   JavaScriptSemanticGraphRelation,
   JavaScriptSemanticGraphUnknown,
   JavaScriptSemanticUnknownOmission,
-  javaScriptSemanticUnknownInputSchema } from "../../domain/javascript/javascriptSemanticGraphSchemas.js";
+  javaScriptSemanticUnknownInputSchema,
+} from "../../domain/javascript/javascriptSemanticGraphSchemas.js";
 import type { ApplicationGraphEvidence } from "../../domain/javascript/javascriptApplicationEvidenceSchemas.js";
 import type { JavaScriptSourceRange } from "../../domain/javascript/javascriptStaticAnalysisTypes.js";
 import type { JavaScriptArtifactFile } from "../../domain/javascript/javascriptArtifactFiles.js";

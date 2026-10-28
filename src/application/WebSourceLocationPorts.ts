@@ -4,7 +4,10 @@ import type {
   WebSourceLocationInput,
   WebSourceMapReport,
 } from "../domain/webSourceLocation.js";
-import type { SelectedWebScriptArtifacts,webArtifactFileSchema } from "../domain/webScriptArtifacts.js";
+import type {
+  SelectedWebScriptArtifacts,
+  webArtifactFileSchema,
+} from "../domain/webScriptArtifacts.js";
 import type { z } from "zod";
 import type { ExecutionOptions } from "./AnalysisProvider.js";
 
